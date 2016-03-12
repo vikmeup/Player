@@ -243,7 +243,13 @@ public class Player: UIViewController {
         self.delegate?.playerPlaybackStateDidChange(self)
         self.player.play()
     }
-
+    public func play() {
+        if self.playbackState != .Playing {
+            return
+        }
+        self.delegate?.playerPlaybackStateDidChange(self)
+        self.player.play()
+    }
     public func pause() {
         if self.playbackState != .Playing {
             return
