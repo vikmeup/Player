@@ -174,6 +174,17 @@ public class Player: UIViewController {
         }
     }
 
+    public var naturalSize: CGSize! {
+        get {
+            if let playerItem = self.playerItem {
+                let track = playerItem.asset.tracksWithMediaType(AVMediaTypeVideo)[0]
+                return track.naturalSize
+            } else {
+                return CGSizeZero
+            }
+        }
+    }
+
     private var asset: AVAsset!
     private var playerItem: AVPlayerItem?
 
@@ -184,6 +195,19 @@ public class Player: UIViewController {
 
     public convenience init() {
         self.init(nibName: nil, bundle: nil)
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+    }
+
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.commonInit()
+    }
+
+    private func commonInit() {
         self.player = AVPlayer()
         self.player.actionAtItemEnd = .Pause
         self.player.addObserver(self, forKeyPath: PlayerRateKey, options: ([NSKeyValueObservingOptions.New, NSKeyValueObservingOptions.Old]) , context: &PlayerObserverContext)
