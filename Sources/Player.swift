@@ -186,9 +186,9 @@ public class Player: UIViewController {
     }
 
     private var asset: AVAsset!
-    private var playerItem: AVPlayerItem?
+    public var playerItem: AVPlayerItem?
 
-    private var player: AVPlayer!
+    public var player: AVPlayer!
     private var playerView: PlayerView!
 
     // MARK: object lifecycle
